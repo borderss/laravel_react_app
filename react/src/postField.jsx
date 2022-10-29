@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { apiMethod, userExists, getToken } from './util.js'
+import { apiMethod, userExists, getToken, makePost, makeComment } from './util.js'
 
 function posts() {
   const [posts, setPosts] = useState(null)
@@ -11,8 +11,8 @@ function posts() {
     posts.forEach(post => {
       output.push(
         <>
-          <span style={{"font-weight": 'bold', "margin-inline": "5px"}}> #{post.id}</span> <span style={{"font-weight": 'bold'}}>{post.title}</span> posted by <span style={{"font-weight": 'bold'}}>{post.user.name}</span>
-          <p style={{"margin-left": "15px"}}>
+          <span style={{"fontWeight": 'bold', "marginInline": "5px"}}> #{post.id}</span> <span style={{"fontWeight": 'bold'}}>{post.title}</span> posted by <span style={{"fontWeight": 'bold'}}>{post.user.name}</span>
+          <p style={{"marginLeft": "15px"}}>
             {post.desc}
           </p>
         </>
@@ -20,9 +20,9 @@ function posts() {
   
       Object.entries(post.comments).forEach(comment => {
         output.push(
-          <div style={{"padding-left": "25px", "border-left": "2px solid"}}>
-            posted by <span style={{"font-weight": 'bold'}}>{comment[1].user.name}</span>
-            <p style={{"padding-left": '10px'}}>{comment[1].comment}</p>
+          <div style={{"paddingLeft": "25px", "borderLeft": "2px solid"}}>
+            posted by <span style={{"fontWeight": 'bold'}}>{comment[1].user.name}</span>
+            <p style={{"paddingLeft": '10px'}}>{comment[1].comment}</p>
           </div>
         )
       })
@@ -52,7 +52,19 @@ function posts() {
     return ( 
       <>
       <h2>Posts</h2>
-      { outputPost() }
+      <form style={{"paddingBottom": "10px"}} onSubmit={(e) => {
+        e.preventDefault()
+        makePost(e.target.title.value, e.target.text.value)
+      }}>
+        <input placeholder="title" name="title"/><br/>
+        <input placeholder="Post text" name="text"/><br/>
+        <button>post</button>
+      </form>
+
+
+      <div style={{"paddingLeft": "10px", "borderLeft": "2px solid"}}>
+        { outputPost() }
+      </div>
       </>
     )
   } else {

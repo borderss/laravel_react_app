@@ -99,5 +99,12 @@ const userExists = () => {
   }
 }
 
+const makePost = (title, text) => {
+  
+}
 
-export { apiMethod, setLS, getLS, removeLS, getUser, getToken, loginUser, registerUser, logoutUser, userExists }
+const makeComment = (text) => {
+  
+}
+
+export { apiMethod, setLS, getLS, removeLS, getUser, getToken, loginUser, registerUser, logoutUser, userExists, makePost, makeComment }
