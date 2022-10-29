@@ -25,7 +25,6 @@ class PostCommentRequest extends FormRequest
     {
         return [
           'post_id' => 'required',
-          'user_id' => 'required',
           'comment' => 'required'
         ];
     }

@@ -28,7 +28,9 @@ class PostCommentController extends Controller
      */
     public function store(PostCommentRequest $request)
     {
-        $postComment = PostComment::create($request->validated());
+        $validatedData = $request->validated();
+        $validatedData['user_id'] = auth()->user()->id;
+        $postComment = PostComment::create($validatedData);
         return new PostCommentResource($postComment);
     }
 

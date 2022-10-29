@@ -99,12 +99,47 @@ const userExists = () => {
   }
 }
 
-const makePost = (title, text) => {
-  
+const makePost = (title, desc) => {
+  if (userExists()) {
+    apiMethod("http://127.0.0.1:8000/api/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${getToken()}`
+      },
+      body: JSON.stringify({
+        title: title,
+        desc: desc
+      }),
+    }).then(() => {
+      location.reload()
+    })
+  } else {
+    console.warn("Making post without user token")
+    return null
+  }
 }
 
-const makeComment = (text) => {
-  
+const makeComment = (id, text) => {
+  if (userExists()) {
+    console.log(id, text)
+    apiMethod("http://127.0.0.1:8000/api/postComments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${getToken()}`
+      },
+      body: JSON.stringify({
+        post_id: id,
+        comment: text
+      })
+    }).then(() => {
+      location.reload()
+    })
+  } else {
+    console.warn("Making post without user token")
+    return null
+  }
 }
 
 export { apiMethod, setLS, getLS, removeLS, getUser, getToken, loginUser, registerUser, logoutUser, userExists, makePost, makeComment }
