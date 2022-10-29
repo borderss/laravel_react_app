@@ -27,15 +27,13 @@ const getToken = () => {
   let user = getLS("user")
 
   if (user) {
-    console.log(user.access_token)
     return user.access_token
   }
 }
 
-
 const loginUser = (email, password) => {
   if (! userExists()) {
-    const response = apiMethod("http://127.0.0.1:8000/api/login", {
+    apiMethod("http://127.0.0.1:8000/api/login", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
@@ -55,7 +53,7 @@ const loginUser = (email, password) => {
 
 const registerUser = (name, email, password) => {
   if (! userExists()) {
-    const response = apiMethod("http://127.0.0.1:8000/api/register", {
+    apiMethod("http://127.0.0.1:8000/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -75,7 +73,7 @@ const registerUser = (name, email, password) => {
 
 const logoutUser = () => {
   if (userExists()) {
-    const response = apiMethod("http://127.0.0.1:8000/api/logout", {
+    apiMethod("http://127.0.0.1:8000/api/logout", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -101,5 +99,5 @@ const userExists = () => {
   }
 }
 
-export { apiMethod, setLS, getLS, removeLS, getUser, getToken, loginUser, registerUser, logoutUser, userExists }
 
+export { apiMethod, setLS, getLS, removeLS, getUser, getToken, loginUser, registerUser, logoutUser, userExists }

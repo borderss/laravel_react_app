@@ -38,9 +38,9 @@ class PostCommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(PostComment $postComment)
+    public function show(PostComment $comment)
     {
-      return new PostCommentResource($postComment);
+      return new PostCommentResource($comment);
     }
 
     /**

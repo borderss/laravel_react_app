@@ -17,7 +17,7 @@ class PostCommentResource extends JsonResource
     return [
       'id' => $this->id,
       'comment' => $this->comment,
-      'user' => $this->user,
+      'user' => new UserResource($this->user),
     ];
   }
 }

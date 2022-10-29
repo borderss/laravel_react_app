@@ -4,6 +4,7 @@ import { userExists, getUser } from './util.js'
 import Login from "./login"
 import Logout from "./logout"
 import Register from "./register"
+import PostField from "./postField"
 
 function profile() {
   const [isloggedIn, setIsLoggedIn] = useState(userExists())
@@ -17,19 +18,23 @@ function profile() {
     setUser(newState)
   }
 
-  let prompt
   if (isloggedIn) {
-    prompt = <><Login/><br/><Register/></>
+    return (
+      <>
+      You are logged in<br/>
+      <Logout onChange={handleChange}/>
+      <PostField/>
+      </>
+    )
   } else {
-    prompt = <Register/>
+    return (
+      <>
+      You are not logged in<br/>
+      <Login onChange={handleChange}/>
+      <Register onChange={handleChange}/>
+      </>
+    )
   }
-
-  return (
-    <div>
-      You {isloggedIn ? "are" : "are not"} logged in<br/>
-      {isloggedIn ? <Logout onChange={handleChange}/> : <><Login onChange={handleChange}/><br/><Register onChange={handleChange}/></> }
-    </div>
-  )
 }
 
 export default profile
