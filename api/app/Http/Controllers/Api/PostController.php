@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Models\PostComment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,6 +44,11 @@ class PostController extends Controller
      */
     public function show(Post $Post)
     {
+      // $comments = PostComment::where("post_id", $Post["id"])->get();
+      // return response()->json([
+      //   'post' => new PostResource($Post),
+      //   'comments' => $comments
+      // ]);
       return new PostResource($Post);
     }
 
